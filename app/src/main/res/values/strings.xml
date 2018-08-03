@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Commerce Project 1</string>
+
+    <string name="share">Поделиться</string>
+    <string name="copy">Копировать</string>
+    <string name="ask_for_permission">Пожалуйста, предоставьте приложению необходимые разрешения</string>
+    <string name="success_copy">Информация скопирована</string>
+</resources>
