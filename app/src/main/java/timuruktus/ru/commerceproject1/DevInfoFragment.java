@@ -101,7 +101,7 @@ public class DevInfoFragment extends Fragment {
 
     private void shareInfo(){
         if(!isPermissionsGranted()){
-            Toast.makeText(context, R.string.ask_for_permission, Toast.LENGTH_SHORT).show();
+            askForPermissions();
             return;
         }
         Intent sendIntent = new Intent();
@@ -113,7 +113,7 @@ public class DevInfoFragment extends Fragment {
 
     private void copyToClipboard(){
         if(!isPermissionsGranted()){
-            Toast.makeText(context, R.string.ask_for_permission, Toast.LENGTH_SHORT).show();
+            askForPermissions();
             return;
         }
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
