@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -22,10 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
+ * Fragment with some Dev Info to share
  * Use the {@link DevInfoFragment#getInstance} factory method to
  * create an instance of this fragment.
  */
-public class DevInfoFragment extends Fragment implements BarcodeGeneratorListener {
+public class DevInfoFragment extends Fragment implements BarcodeGenerator.BarcodeGeneratorListener {
 
     private Button copyButton;
     private Button shareButton;
@@ -59,7 +59,7 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(
                 R.layout.dev_info_fragment, container, false);
@@ -87,6 +87,10 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
 
     }
 
+    /**
+     * Checks if all permissions for this fragment are granted
+     * @return true if all permissions are granted, false if not
+     */
     private boolean isPermissionsGranted(){
         int readPhoneStatePermission = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_PHONE_STATE);
@@ -98,30 +102,42 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
         }
     }
 
+    /**
+     * This method ask system for all permissions which are not granted
+     * and needed to this fragment
+     */
     private void askForPermissions(){
         requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                 READ_PHONE_STATE_PERMISSION_REQUEST);
     }
 
+    /**
+     * This method fills all TextViews and ImageViews both
+     * using system information
+     */
     private void setDevInfo(){
         TelephonyManager tm = context.getSystemService(TelephonyManager.class);
-        int height = imeiImage.getHeight();
-        int width = imeiImage.getWidth();
         BarcodeGenerator barcodeGenerator = new BarcodeGenerator();
         try {
             imeiText.setText("" + tm.getDeviceId(1));
-            barcodeGenerator.generateBarcode(height, width, tm.getDeviceId(1), this, IMEI_ID);
+            barcodeGenerator.generateBarcode(tm.getDeviceId(1), this, IMEI_ID);
             imei2Text.setText("" + tm.getDeviceId(2));
-            barcodeGenerator.generateBarcode(height, width, tm.getDeviceId(2), this, IMEI2_ID);
+            barcodeGenerator.generateBarcode(tm.getDeviceId(2), this, IMEI2_ID);
             snText.setText(android.os.Build.SERIAL);
-            barcodeGenerator.generateBarcode(height, width, android.os.Build.SERIAL, this, SN_ID);
+            barcodeGenerator.generateBarcode(android.os.Build.SERIAL, this, SN_ID);
             simidText.setText("" + tm.getSimSerialNumber());
-            barcodeGenerator.generateBarcode(height, width, tm.getSimSerialNumber(), this, SIMID_ID);
+            barcodeGenerator.generateBarcode(tm.getSimSerialNumber(), this, SIMID_ID);
         }catch (SecurityException ex){
             ex.printStackTrace();
         }
     }
 
+    /**
+     * This method allows you to share Dev Info which has the following form to other apps
+     * FORM:
+     *
+     * IMEI:XXXXXX;IMEI2:XXXXXX;SN:XXXXXX;SIMID:XXXXXX;
+     */
     private void shareInfo(){
         if(!isPermissionsGranted()){
             askForPermissions();
@@ -134,6 +150,12 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
         startActivity(sendIntent);
     }
 
+    /**
+     * This method fills your clipboard with Dev Info which has the following form
+     * FORM:
+     *
+     * IMEI:XXXXXX;IMEI2:XXXXXX;SN:XXXXXX;SIMID:XXXXXX;
+     */
     private void copyToClipboard(){
         if(!isPermissionsGranted()){
             askForPermissions();
@@ -147,6 +169,12 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
         Toast.makeText(context, R.string.success_copy, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @return string with the following form
+     * FORM:
+     *
+     * IMEI:XXXXXX;IMEI2:XXXXXX;SN:XXXXXX;SIMID:XXXXXX;
+     */
     private String buildTextInfo(){
         return "IMEI:" + imeiText.getText().toString()
                 + ";IMEI2:" + imei2Text.getText().toString()

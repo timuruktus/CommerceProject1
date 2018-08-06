@@ -8,9 +8,18 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+/**
+ * This class allows you to create barcodes from String. Also it has inner listener.
+ */
 public class BarcodeGenerator {
 
-    public void generateBarcode(int height, int width, String text, BarcodeGeneratorListener listener,
+    /**
+     * Use this method to generate your custom barcode
+     * @param text - basic text on which barcode is generated
+     * @param listener - listener to handle method's callbacks
+     * @param imageId - used to differentiate barcode bitmaps
+     */
+    public void generateBarcode(String text, BarcodeGeneratorListener listener,
                                 int imageId){
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
@@ -21,5 +30,18 @@ public class BarcodeGenerator {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Implement this class to handle BarcodeGenerator callbacks
+     */
+    public interface BarcodeGeneratorListener {
+
+        /**
+         * BarcodeGenerator callback method
+         * @param bitmap - barcode bitmap
+         * @param imageId - used to differentiate barcode bitmaps
+         */
+        void onBarcodeGenerated(Bitmap bitmap, int imageId);
     }
 }
