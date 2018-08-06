@@ -173,7 +173,7 @@ public class DevInfoFragment extends Fragment implements BarcodeGeneratorListene
     }
 
     @Override
-    public void onBarcodeGenerated(Bitmap bitmap,@IdRes int imageId) {
+    public void onBarcodeGenerated(Bitmap bitmap, int imageId) {
 
         switch (imageId){
             case IMEI_ID:
