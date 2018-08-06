@@ -1,112 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/imeiInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="IMEI:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/imeiText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imeiInfo"
-        app:layout_constraintStart_toEndOf="@+id/imeiInfo"
-        app:layout_constraintTop_toTopOf="@+id/imeiInfo" />
+            <ImageView
+                android:id="@+id/imeiImage"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@color/zxing_transparent" />
 
-    <TextView
-        android:id="@+id/imei2Info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="IMEI2:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/imeiInfo"
-        app:layout_constraintTop_toBottomOf="@+id/imeiInfo" />
+            <ImageView
+                android:id="@+id/snImage"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imei2Info"
+                app:srcCompat="@color/zxing_transparent" />
 
-    <TextView
-        android:id="@+id/imei2Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imei2Info"
-        app:layout_constraintStart_toEndOf="@+id/imei2Info"
-        app:layout_constraintTop_toTopOf="@+id/imei2Info" />
+            <ImageView
+                android:id="@+id/simidImage"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/snInfo"
+                app:srcCompat="@color/zxing_transparent" />
 
-    <TextView
-        android:id="@+id/snInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="SN:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imei2Info" />
+            <ImageView
+                android:id="@+id/imei2Image"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imeiInfo"
+                app:srcCompat="@color/zxing_transparent" />
 
-    <TextView
-        android:id="@+id/snText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/snInfo"
-        app:layout_constraintStart_toEndOf="@+id/snInfo"
-        app:layout_constraintTop_toTopOf="@+id/snInfo" />
+            <TextView
+                android:id="@+id/imei2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imei2Info"
+                app:layout_constraintStart_toEndOf="@+id/imei2Info"
+                app:layout_constraintTop_toTopOf="@+id/imei2Info" />
 
-    <TextView
-        android:id="@+id/simidInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="SIMID:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/snInfo" />
+            <TextView
+                android:id="@+id/imei2Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="IMEI2:"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/imeiInfo"
+                app:layout_constraintTop_toBottomOf="@+id/imei2Image" />
 
-    <TextView
-        android:id="@+id/simidText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/simidInfo"
-        app:layout_constraintStart_toEndOf="@+id/simidInfo"
-        app:layout_constraintTop_toTopOf="@+id/simidInfo" />
+            <TextView
+                android:id="@+id/simidText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/simidInfo"
+                app:layout_constraintStart_toEndOf="@+id/simidInfo"
+                app:layout_constraintTop_toTopOf="@+id/simidInfo" />
 
-    <Button
-        android:id="@+id/copyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/copy"
-        app:layout_constraintEnd_toStartOf="@+id/shareBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simidInfo" />
+            <Button
+                android:id="@+id/shareBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/share"
+                app:layout_constraintBottom_toBottomOf="@+id/copyBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/copyBtn"
+                app:layout_constraintTop_toTopOf="@+id/copyBtn" />
 
-    <Button
-        android:id="@+id/shareBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/share"
-        app:layout_constraintBottom_toBottomOf="@+id/copyBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/copyBtn"
-        app:layout_constraintTop_toTopOf="@+id/copyBtn" />
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/snInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="SN:"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/snImage" />
+
+            <TextView
+                android:id="@+id/imeiInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="IMEI:"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imeiImage" />
+
+            <TextView
+                android:id="@+id/snText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/snInfo"
+                app:layout_constraintStart_toEndOf="@+id/snInfo"
+                app:layout_constraintTop_toTopOf="@+id/snInfo" />
+
+            <TextView
+                android:id="@+id/simidInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="SIMID:"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/simidImage" />
+
+            <Button
+                android:id="@+id/copyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/copy"
+                app:layout_constraintEnd_toStartOf="@+id/shareBtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/simidInfo" />
+
+            <TextView
+                android:id="@+id/imeiText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imeiInfo"
+                app:layout_constraintStart_toEndOf="@+id/imeiInfo"
+                app:layout_constraintTop_toTopOf="@+id/imeiInfo" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>

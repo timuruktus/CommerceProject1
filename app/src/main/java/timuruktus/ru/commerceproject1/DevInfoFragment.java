@@ -6,7 +6,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +25,7 @@ import android.widget.Toast;
  * Use the {@link DevInfoFragment#getInstance} factory method to
  * create an instance of this fragment.
  */
-public class DevInfoFragment extends Fragment {
+public class DevInfoFragment extends Fragment implements BarcodeGeneratorListener {
 
     private Button copyButton;
     private Button shareButton;
@@ -30,8 +33,16 @@ public class DevInfoFragment extends Fragment {
     private TextView imei2Text;
     private TextView snText;
     private TextView simidText;
+    private ImageView imeiImage;
+    private ImageView imei2Image;
+    private ImageView snImage;
+    private ImageView simidImage;
     private Context context;
     private final static int READ_PHONE_STATE_PERMISSION_REQUEST = 1;
+    final static int IMEI_ID = 1;
+    final static int IMEI2_ID = 2;
+    final static int SN_ID = 3;
+    final static int SIMID_ID = 4;
 
 
     public DevInfoFragment() {
@@ -59,6 +70,11 @@ public class DevInfoFragment extends Fragment {
         imei2Text = view.findViewById(R.id.imei2Text);
         snText = view.findViewById(R.id.snText);
         simidText = view.findViewById(R.id.simidText);
+
+        imeiImage = view.findViewById(R.id.imeiImage);
+        imei2Image = view.findViewById(R.id.imei2Image);
+        snImage = view.findViewById(R.id.snImage);
+        simidImage = view.findViewById(R.id.simidImage);
         if(isPermissionsGranted()){
             setDevInfo();
         }else{
@@ -89,11 +105,18 @@ public class DevInfoFragment extends Fragment {
 
     private void setDevInfo(){
         TelephonyManager tm = context.getSystemService(TelephonyManager.class);
+        int height = imeiImage.getHeight();
+        int width = imeiImage.getWidth();
+        BarcodeGenerator barcodeGenerator = new BarcodeGenerator();
         try {
             imeiText.setText("" + tm.getDeviceId(1));
+            barcodeGenerator.generateBarcode(height, width, tm.getDeviceId(1), this, IMEI_ID);
             imei2Text.setText("" + tm.getDeviceId(2));
+            barcodeGenerator.generateBarcode(height, width, tm.getDeviceId(2), this, IMEI2_ID);
             snText.setText(android.os.Build.SERIAL);
+            barcodeGenerator.generateBarcode(height, width, android.os.Build.SERIAL, this, SN_ID);
             simidText.setText("" + tm.getSimSerialNumber());
+            barcodeGenerator.generateBarcode(height, width, tm.getSimSerialNumber(), this, SIMID_ID);
         }catch (SecurityException ex){
             ex.printStackTrace();
         }
@@ -147,5 +170,26 @@ public class DevInfoFragment extends Fragment {
             }
 
         }
+    }
+
+    @Override
+    public void onBarcodeGenerated(Bitmap bitmap,@IdRes int imageId) {
+
+        switch (imageId){
+            case IMEI_ID:
+                imeiImage.setImageBitmap(bitmap);
+                break;
+            case IMEI2_ID:
+                imei2Image.setImageBitmap(bitmap);
+                break;
+            case SN_ID:
+                snImage.setImageBitmap(bitmap);
+                break;
+            case SIMID_ID:
+                simidImage.setImageBitmap(bitmap);
+                break;
+
+        }
+
     }
 }
